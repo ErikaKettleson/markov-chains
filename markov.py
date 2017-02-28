@@ -9,7 +9,7 @@ def open_and_read_file(file_path):
     """
 
     text_string = open(file_path).read()
-    print text_string
+    return text_string.split()
 
     "This should be a variable that contains your file text as one long string"
 
@@ -28,10 +28,27 @@ def make_chains(text_string):
     """
 
     chains = {}
+    current_key = ()
 
-    # your code goes here
+    for index in range(len(text_string) - 2):
+        bi_gram = text_string[index], text_string[index + 1]
+        chains[bi_gram]= []
+        chains[bi_gram].append(text_string[index + 2])
+        print chains[bi_gram]
+        # # chains[bi_gram] = chains.get(bi_gram, []).append(text_string[index + 2])
+        # print bi_gram, chains.get(bi_gram, []).append(text_string[index + 2])
+        
+    # for bi_gram in bi_grams:
+    #     value = 
 
-    return chains
+
+
+
+
+# for i in range(len(text) - 1):
+#     print text[i], text[i + 1]
+
+    # return chains
 
 
 def make_text(chains):
