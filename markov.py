@@ -8,7 +8,7 @@ def open_and_read_file(file_path):
     """
 
     text_string = open(file_path).read()
-    return text_string.split()
+    return text_string
 
     "This should be a variable that contains your file text as one long string"
 
@@ -28,11 +28,13 @@ def make_chains(text_string):
 
     chains = {}
     current_key = ()
+    words = text_string.split()
+    words.append(None)
 
-    for index in range(len(text_string) - 2):
-        bi_gram = text_string[index], text_string[index + 1]
+    for index in range(len(words) - 2):
+        bi_gram = words[index], words[index + 1]
         bi_gram_value = chains.get(bi_gram, [])
-        bi_gram_value.append(text_string[index + 2])
+        bi_gram_value.append(words[index + 2])
         chains[bi_gram] = bi_gram_value
     return chains
 
@@ -40,17 +42,45 @@ def make_chains(text_string):
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
-    result = ""
-    bi_gram1 = choice(chains.keys())
-    ran_value = choice(chains.values())
-    random_text = bi_gram1[0] + " " + bi_gram1[1] + " " + ran_value[0]
-    print random_text
+
+    # result = ""
+    # bi_gram1 = choice(chains.keys())
+    # for bi_gram in chains:
+    #     ran_value = choice(chains.values())
+    #     new_bi_gram = bi_gram[1] + ran_value[0]
+    #     print new_bi_gram
+
 
     # for bi_gram in chains:
-    #     random_value = choice(chains[bi_gram])
-    #     random_text = [(bi_gram, random_value) for bi_gram in chains]
-    #     # random_text = random_text + random_value
-    #     # print type(random_text), type(random_value)
+    #     current_bi_gram = choice(chains.keys())
+    #     chains[current_bi_gram] current_bi_gram
+    #     print current_bi_gram
+
+    # random_text = bi_gram1[0] + " " + bi_gram1[1] + " " + ran_value[0]
+    # return random_text
+
+
+    # Get random bi_gram to start
+    starting_bi_gram = choice(chains.keys())
+    # store first two words in list
+    markov_words = list(starting_bi_gram)
+
+
+    current_bi_gram = starting_bi_gram
+    while True:
+        # Get the next word by choosing word from value of current bigram
+        next_word = choice(chains[current_bi_gram])
+        # if next_word is None:
+        if not next_word: # We reached the end of the text
+            break
+        # Storing next word in list
+        markov_words.append(next_word)
+        # reassigning current_bi_gram to the second word & the next_word
+        current_bi_gram = current_bi_gram[1:] + (next_word,)
+
+    # joining list into one string and returning it
+    return " ".join(markov_words)
+
 
 
 
