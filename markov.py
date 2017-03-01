@@ -32,16 +32,13 @@ def make_chains(text_string):
 
     for index in range(len(text_string) - 2):
         bi_gram = text_string[index], text_string[index + 1]
-        chains[bi_gram]= []
-        chains[bi_gram].append(text_string[index + 2])
-        print chains[bi_gram]
-        # # chains[bi_gram] = chains.get(bi_gram, []).append(text_string[index + 2])
+        bi_gram_value = chains.get(bi_gram, [])
+        bi_gram_value.append(text_string[index + 2])
+        chains[bi_gram] = bi_gram_value
+    return chains
+        # print chains[bi_gram]
+        # chains[bi_gram] = chains.get(bi_gram, []).append(text_string[index + 2])
         # print bi_gram, chains.get(bi_gram, []).append(text_string[index + 2])
-        
-    # for bi_gram in bi_grams:
-    #     value = 
-
-
 
 
 
