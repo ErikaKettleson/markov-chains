@@ -1,6 +1,5 @@
 from random import choice
 
-
 def open_and_read_file(file_path):
     """Takes file path as string; returns text as string.
 
@@ -36,26 +35,23 @@ def make_chains(text_string):
         bi_gram_value.append(text_string[index + 2])
         chains[bi_gram] = bi_gram_value
     return chains
-        # print chains[bi_gram]
-        # chains[bi_gram] = chains.get(bi_gram, []).append(text_string[index + 2])
-        # print bi_gram, chains.get(bi_gram, []).append(text_string[index + 2])
 
-
-
-# for i in range(len(text) - 1):
-#     print text[i], text[i + 1]
-
-    # return chains
 
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
+    result = ""
+    bi_gram1 = choice(chains.keys())
+    ran_value = choice(chains.values())
+    random_text = bi_gram1[0] + " " + bi_gram1[1] + " " + ran_value[0]
+    print random_text
 
-    text = ""
+    # for bi_gram in chains:
+    #     random_value = choice(chains[bi_gram])
+    #     random_text = [(bi_gram, random_value) for bi_gram in chains]
+    #     # random_text = random_text + random_value
+    #     # print type(random_text), type(random_value)
 
-    # your code goes here
-
-    return text
 
 
 input_path = "green-eggs.txt"
